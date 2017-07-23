@@ -1,0 +1,18 @@
+---
+
+- hosts: vagrant
+  become: yes
+  vars:
+    docker_package: "docker-ce=17.03*"
+  roles:
+    - geerlingguy.docker
+  tags:
+    - docker
+
+- hosts: vagrant
+  become: yes
+  roles:
+    - ../../../ansible-kontena-agent
+  tags:
+    - kontena_agent
+
