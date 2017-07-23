@@ -21,6 +21,8 @@
     && rm -f /var/lib/dpkg/info/kontena-agent.postinst \
     && dpkg --configure kontena-agent \
     && apt-get install -yf
+  args:
+    chdir: /tmp # W: Can't drop privileges for downloading as file ...
 
 - name: Setup Master URI inside env file
   lineinfile:

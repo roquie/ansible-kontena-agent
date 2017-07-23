@@ -5,7 +5,12 @@ services: docker
 dist: xenial
 
 env:
-  - distro: ubuntu1604
+  # dpkg: dependency problems prevent configuration of kontena-agent:\n kontena-agent depends on resolvconf
+  # https://github.com/moby/moby/issues/1297
+  # - distro: ubuntu1604
+  # with Vagrant-image and normal distro will work.
+
+
   - distro: ubuntu1404
 
 branches:
