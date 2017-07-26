@@ -39,6 +39,12 @@
     regexp: "^KONTENA_TOKEN="
     line: "KONTENA_TOKEN={{ ka_token }}"
 
+- name: Setup Peer Interface
+  lineinfile:
+    path: "{{ ka_config_path }}"
+    regexp: "^KONTENA_PEER_INTERFACE="
+    line: "KONTENA_PEER_INTERFACE={{ ka_peer_interface|default('eth1') }}"
+
 - name: Restart Kontena Agent
   when: ansible_distribution_release == "xenial"
   systemd:
