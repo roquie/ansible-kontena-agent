@@ -3,7 +3,7 @@ galaxy_info:
   author: roquie
   description: Install Kontena Agent on node-server.
   license: MIT
-  min_ansible_version: 2.2
+  min_ansible_version: 2.3
   platforms:
     - name: Ubuntu
       versions:
@@ -17,4 +17,5 @@ galaxy_info:
     - node
     - agent
 
-dependencies: []
+dependencies:
+  - geerlingguy.ntp

@@ -54,3 +54,6 @@
   with_items:
     - docker
     - kontena-agent
+
+- include: ntp.yml
+  when: ka_configure_ntp

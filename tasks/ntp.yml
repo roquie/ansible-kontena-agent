@@ -1,0 +1,25 @@
+---
+
+- name: Stop ntp service.
+  service:
+    name: "ntp"
+    state: stopped
+
+- name: Register Master server as NTP main time server for Nodes.
+  template:
+    src: templates/ntp.conf.j2
+    dest: /etc/ntp.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure NTP-date package are installed.
+  package: name=ntpdate state=present
+
+- name: Force resynchronize the system time.
+  shell: ntpdate -s {{ ka_ntpdate_server }}
+
+- name: Start ntp service.
+  service:
+    name: "ntp"
+    state: started
