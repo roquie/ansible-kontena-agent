@@ -2,3 +2,8 @@
 
 - name: geerlingguy.docker
   version: 2.0.5
+
+- name: roquie.ansible-ntpdate
+
+- name: geerlingguy.ntp
+  version: 1.5.2

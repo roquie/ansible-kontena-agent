@@ -10,16 +10,13 @@
     content: "deb http://dl.bintray.com/kontena/ubuntu {{ ansible_distribution_release }} main"
     dest: /etc/apt/sources.list.d/kontena.list
 
-- name: Update apt cache
-  apt:
-    update_cache: yes
-
 - name: Ensure resolvconf is installed.
   package: name=resolvconf state=installed
 
 - name: Install Kontena Agent without interactive mode & postinstall script
   shell: >
-    apt-get download kontena-agent \
+    apt-get update \
+    && apt-get download kontena-agent \
     && dpkg --unpack kontena-agent*.deb \
     && rm -f /var/lib/dpkg/info/kontena-agent.postinst \
     && dpkg --configure kontena-agent \
