@@ -52,5 +52,15 @@
     - docker
     - kontena-agent
 
+- name: Check that the Kontena Master is installed
+  stat:
+    path: "{{ ka_master_config_path }}"
+  register: stat_result
+
+- name: Skip configure NTP for Agent, if Master installed on the same host
+  set_fact:
+    ka_ntp_configure: no
+  when: stat_result.stat.exists
+
 - include: ntp.yml
-  when: ka_configure_ntp
+  when: ka_ntp_configure

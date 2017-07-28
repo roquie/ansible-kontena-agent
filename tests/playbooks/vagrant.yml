@@ -11,6 +11,11 @@
 
 - hosts: vagrant
   become: yes
+  pre_tasks:
+#    - file:
+#        path: "{{ ka_master_config_path }}"
+#        state: touch
+#        mode: "u=rw,g=r,o=r"
   roles:
     - ../../../ansible-kontena-agent
   tags:
