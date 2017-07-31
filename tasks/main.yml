@@ -42,12 +42,15 @@
     regexp: "^KONTENA_PEER_INTERFACE="
     line: "KONTENA_PEER_INTERFACE={{ ka_peer_interface|default('eth1') }}"
 
-- name: Restart Kontena Agent
+- name: Restart services
   when: ansible_distribution_release == "xenial"
   systemd:
-    name: kontena-agent
+    name: "{{ item }}"
     daemon_reload: yes
     state: restarted
+  with_items:
+    - docker
+    - kontena-agent
 
 - name: Restart services
   when: ansible_distribution_release == "trusty"

@@ -8,8 +8,8 @@ Vagrant.configure('2') do |config|
   config.ssh.private_key_path = '~/.vagrant.d/insecure_private_key'
 
   config.vm.define 'ansible-kontena-agent' do |machine|
-    #machine.vm.box = "bento/ubuntu-16.04"
-    machine.vm.box = "ubuntu/trusty64"
+    machine.vm.box = "bento/ubuntu-16.04"
+    #machine.vm.box = "ubuntu/trusty64"
     #machine.vm.box = "ubuntu/precise64"
     #machine.vm.box = "debian/jessie64"
     #machine.vm.box = "debian/wheezy64"
