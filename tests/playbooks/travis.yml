@@ -17,6 +17,9 @@
     - docker
 
 - hosts: local
+  pre_tasks:
+    - include_role:
+        name: roquie.ansible-ntpdate
   roles:
     - role_under_test
   tags:
