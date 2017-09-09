@@ -1,6 +1,10 @@
 ---
 
-## Main Variables ##
+## Role variables ##
+
+ka_resolvconf_install: yes
+
+## Kontena main Variables ##
 
 # Kontena Master websocket uri (required)
 ka_master_uri: "ws://127.0.0.1:8080"
@@ -13,7 +17,7 @@ ka_peer_interface: "eth1"
 
 
 
-## Other variables ##
+## Kontena other variables ##
 
 # Specify node public ip, overrides default resolving
 #ka_public_ip: ""

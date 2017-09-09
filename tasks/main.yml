@@ -11,6 +11,7 @@
     dest: /etc/apt/sources.list.d/kontena.list
 
 - name: Ensure resolvconf is installed.
+  when: ka_resolvconf_install
   package: name=resolvconf state=installed
 
 - name: Install Kontena Agent without interactive mode & postinstall script
