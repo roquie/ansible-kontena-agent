@@ -24,23 +24,17 @@
   args:
     chdir: /tmp # W: Can't drop privileges for downloading as file ...
 
-- name: Setup Master URI inside env file
-  lineinfile:
-    path: "{{ ka_config_path }}"
-    regexp: "^KONTENA_URI="
-    line: "KONTENA_URI={{ ka_master_uri }}"
+- name: Configure Kontena Agent (xenial)
+  when: ansible_distribution_release == 'xenial'
+  template:
+    src: "templates/kontena-agent.env.j2"
+    dest: "/etc/kontena-agent.env"
 
-- name: Setup Token inside env file
-  lineinfile:
-    path: "{{ ka_config_path }}"
-    regexp: "^KONTENA_TOKEN="
-    line: "KONTENA_TOKEN={{ ka_token }}"
-
-- name: Setup Peer Interface
-  lineinfile:
-    path: "{{ ka_config_path }}"
-    regexp: "^KONTENA_PEER_INTERFACE="
-    line: "KONTENA_PEER_INTERFACE={{ ka_peer_interface|default('eth1') }}"
+- name: Configure Kontena Agent (trusty)
+  when: ansible_distribution_release == 'trusty'
+  template:
+    src: "templates/kontena-agent.env.j2"
+    dest: "/etc/default/kontena-agent"
 
 - name: Restart services
   when: ansible_distribution_release == "xenial"

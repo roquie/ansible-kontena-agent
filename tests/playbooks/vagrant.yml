@@ -18,7 +18,7 @@
     - ../../../ansible-kontena-agent
   post_tasks:
     - include_role:
-        name: roquie.ansible-ntpdate
+        name: galexrt.ansible-ntpdate
   tags:
     - kontena_agent
 

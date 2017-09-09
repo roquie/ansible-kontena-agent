@@ -1,7 +1,52 @@
 ---
 
+## Main Variables ##
+
+# Kontena Master websocket uri (required)
 ka_master_uri: "ws://127.0.0.1:8080"
+
+# Kontena Grid token (required)
 ka_token: "secret_token"
+
+# network interface for peer/private communication (default: eth1)
 ka_peer_interface: "eth1"
 
-ka_config_path: "{{ (ansible_distribution_release == 'xenial') | ternary('/etc/kontena-agent.env', '/etc/default/kontena-agent') }}"
+
+
+## Other variables ##
+
+# Specify node public ip, overrides default resolving
+#ka_public_ip: ""
+
+# Specify node private ip, overrides default resolving
+#ka_private_ip: ""
+
+# Logging level, http://www.rubydoc.info/gems/logger/1.2.8/Logger/Severity#INFO-constant
+#ka_log_level: 1
+
+# etcd image (default: kontena/etcd)
+#ka_etcd_image: "kontena/etcd"
+
+# etcd image version
+#ka_etcd_version: "2.3.7"
+
+# cadvisor image (default: kontena/cadvisor)
+#ka_cadvisor_image: "kontena/cadvisor"
+
+# cadvisor image version
+#ka_cadvisor_version: "v0.24.1"
+
+# if set to `true` agent won't start cadvisor at all
+#ka_cadvisor_disabled: "false"
+
+# weave net image (default: weaveworks/weave)
+#ka_weave_image: "weaveworks/weave"
+
+# weave exec image (default: weaveworks/weaveexec)
+#ka_weaveexec_image: "weaveworks/weaveexec"
+
+# weave net version
+#ka_weave_version: "1.9.3"
+
+# websocket timeout in seconds (default: 5.0)
+#ka_websocket_timeout: 5.0
