@@ -16,9 +16,9 @@
         name: geerlingguy.ntp
   roles:
     - ../../../ansible-kontena-agent
-  post_tasks:
-    - include_role:
-        name: galexrt.ansible-ntpdate
+#  post_tasks:
+#    - include_role:
+#        name: galexrt.ansible-ntpdate
   tags:
     - kontena_agent
 

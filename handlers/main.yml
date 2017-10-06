@@ -1,0 +1,6 @@
+---
+
+- name: restart kontena-agent
+  service:
+    name: kontena-agent
+    state: restarted
