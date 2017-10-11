@@ -17,9 +17,6 @@
     - docker
 
 - hosts: local
-  pre_tasks:
-    #- include_role: name=geerlingguy.ntp
-    - include_role: name=galexrt.ansible-ntpdate
   roles:
     - role_under_test
   tags:
