@@ -15,21 +15,12 @@
     package: resolvconf
     state: installed
 
-- name: Ensure bash in installed
-  apt:
-    package: bash
-    state: installed
-  
 - name: Set master uri for non interactive mode
-  shell: debconf-set-selections <<< "kontena-agent kontena-agent/server_uri password {{ ka_master_uri }}"
-  args:
-      executable: /bin/bash
+  shell: echo "kontena-agent kontena-agent/server_uri string {{ ka_master_uri }}" | debconf-set-selections
   changed_when: false
 
 - name: Set grid token for non interactive mode
-  shell: debconf-set-selections <<< "kontena-agent kontena-agent/grid_token password {{ ka_token }}"
-  args:
-      executable: /bin/bash
+  shell: echo "kontena-agent kontena-agent/grid_token string {{ ka_token }}" | debconf-set-selections
   changed_when: false
   
 - name: Install Kontena Agent
