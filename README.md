@@ -23,7 +23,10 @@ Example, how to use, can be found at `tests` directory.
 ```
 ansible-galaxy install roquie.ansible-kontena-agent
 ```
-
+## Important
+Kontena-agent package does not require NTP for installation, but it is strongly recommended by kontena's documentation, 
+so you should supply NTP on your hosts by self. We advise to use these roles:
+```galaxert.ntp-date``` and ```geerlingguy.ntp```.
 ## Supported OS
 
 For now supports:
