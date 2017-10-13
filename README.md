@@ -23,10 +23,13 @@ Example, how to use, can be found at `tests` directory.
 ```
 ansible-galaxy install roquie.ansible-kontena-agent
 ```
+
 ## Important
+
 Kontena-agent package does not require NTP for installation, but it is strongly recommended by kontena's documentation, 
-so you should supply NTP on your hosts by self. We advise to use these roles:
-```galaxert.ntp-date``` and ```geerlingguy.ntp```.
+so you should supply NTP on your hosts by self. We advise to use these role:
+[galexrt.ansible-ntpdate](https://github.com/galexrt/ansible-ntpdate).
+
 ## Supported OS
 
 For now supports:
@@ -40,7 +43,7 @@ For now supports:
 * `vagrant up` 
 
 ### Warning
-If u want rename project, make sure to rename role (`ansible-kontena-agent`) inside `tests/playbooks/vagrant.yml`.
+If u want rename project, make sure to rename role (`ansible-kontena-agent`) in `tests/playbooks/vagrant.yml` file.
 
 ## License
 
