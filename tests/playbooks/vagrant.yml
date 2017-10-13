@@ -11,14 +11,8 @@
 
 - hosts: vagrant
   become: yes
-  pre_tasks:
-    - include_role:
-        name: geerlingguy.ntp
   roles:
     - ../../../ansible-kontena-agent
-  post_tasks:
-    - include_role:
-        name: galexrt.ansible-ntpdate
   tags:
     - kontena_agent
 

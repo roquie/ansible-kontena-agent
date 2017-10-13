@@ -5,25 +5,26 @@
     url: https://bintray.com/user/downloadSubjectPublicKey?username=bintray
     state: present
 
-- name: Add kontena.list
-  copy:
-    content: "deb http://dl.bintray.com/kontena/ubuntu {{ ansible_distribution_release }} main"
-    dest: /etc/apt/sources.list.d/kontena.list
+- name: Add kontena repository
+  apt_repository:
+    repo: "deb http://dl.bintray.com/kontena/ubuntu {{ ansible_distribution_release }} main"
 
 - name: Ensure resolvconf is installed.
   when: ka_resolvconf_install
-  package: name=resolvconf state=installed
+  apt:
+    package: resolvconf
+    state: installed
 
-- name: Install Kontena Agent without interactive mode & postinstall script
-  shell: >
-    apt-get update \
-    && apt-get download kontena-agent \
-    && dpkg --unpack kontena-agent*.deb \
-    && rm -f /var/lib/dpkg/info/kontena-agent.postinst \
-    && dpkg --configure kontena-agent \
-    && apt-get install -yf
-  args:
-    chdir: /tmp # W: Can't drop privileges for downloading as file ...
+- name: Set master uri for non interactive mode
+  shell: echo "kontena-agent kontena-agent/server_uri string {{ ka_master_uri }}" | debconf-set-selections
+  changed_when: false
+
+- name: Set grid token for non interactive mode
+  shell: echo "kontena-agent kontena-agent/grid_token string {{ ka_token }}" | debconf-set-selections
+  changed_when: false
+  
+- name: Install Kontena Agent
+  package: name=kontena-agent state=installed
 
 - name: Get server public IP
   when: ka_public_ip_auto_resolve|default(false)
@@ -39,28 +40,15 @@
   template:
     src: "templates/kontena-agent.env.j2"
     dest: "/etc/kontena-agent.env"
+    mode: 0600
+  notify:
+  - restart kontena-agent
 
 - name: Configure Kontena Agent (trusty)
   when: ansible_distribution_release == 'trusty'
   template:
     src: "templates/kontena-agent.env.j2"
     dest: "/etc/default/kontena-agent"
-
-- name: Restart services
-  when: ansible_distribution_release == "xenial"
-  systemd:
-    name: "{{ item }}"
-    daemon_reload: yes
-    state: restarted
-  with_items:
-    - docker
-    - kontena-agent
-
-- name: Restart services
-  when: ansible_distribution_release == "trusty"
-  service:
-    name: "{{ item }}"
-    state: restarted
-  with_items:
-    - docker
-    - kontena-agent
+    mode: 0600
+  notify:
+  - restart kontena-agent

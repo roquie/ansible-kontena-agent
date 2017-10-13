@@ -17,7 +17,7 @@ script:
   # Configure test script so we can run extra tests after playbook is run.
   - export container_id=$(date +%s)
   - export cleanup=false
-  - export test_idempotence=false
+  - export test_idempotence=true
   - export playbook=playbooks/travis.yml
   - export options="-i /etc/ansible/roles/role_under_test/tests/inventory/test"
 

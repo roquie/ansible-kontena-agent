@@ -30,6 +30,7 @@ Vagrant.configure('2') do |config|
       ansible.host_key_checking = false
       ansible.limit = 'vagrant'
       ansible.config_file = 'tests/ansible.cfg'
+      ansible.verbose = true
     end
   end
 end
